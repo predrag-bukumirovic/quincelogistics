@@ -31,7 +31,13 @@ export default function ContactForm() {
       <div className="form-row two">
         <div className="form-field">
           <label htmlFor="ime">Ime i prezime</label>
-          <input id="ime" name="ime" type="text" placeholder="Vaše ime" required />
+          <input
+            id="ime"
+            name="ime"
+            type="text"
+            placeholder="Vaše ime"
+            required
+          />
         </div>
         <div className="form-field">
           <label htmlFor="email">Email adresa</label>
@@ -47,7 +53,12 @@ export default function ContactForm() {
 
       <div className="form-field">
         <label htmlFor="telefon">Telefon</label>
-        <input id="telefon" name="telefon" type="tel" placeholder="+381 6x xxx xxxx" />
+        <input
+          id="telefon"
+          name="telefon"
+          type="tel"
+          placeholder="+381 6x xxx xxxx"
+        />
       </div>
 
       <div className="form-field">
@@ -60,7 +71,11 @@ export default function ContactForm() {
         />
       </div>
 
-      <button type="submit" className="btn btn-primary" style={{ alignSelf: "flex-start" }}>
+      <button
+        type="submit"
+        className="btn btn-primary"
+        style={{ alignSelf: "flex-start" }}
+      >
         Pošalji upit
       </button>
       <p className="form-note">

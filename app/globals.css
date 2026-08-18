@@ -363,7 +363,10 @@ body.menu-open {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   opacity: 0;
   transform: translateX(24px);
-  transition: opacity 0.4s ease, transform 0.4s ease, color 0.2s ease;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease,
+    color 0.2s ease;
 }
 
 .mobile-nav.open .mobile-nav-links a {
@@ -399,7 +402,9 @@ body.menu-open {
   width: calc(100% - 48px);
   opacity: 0;
   transform: translateX(24px);
-  transition: opacity 0.4s ease 0.44s, transform 0.4s ease 0.44s;
+  transition:
+    opacity 0.4s ease 0.44s,
+    transform 0.4s ease 0.44s;
 }
 
 .mobile-nav.open .btn {
@@ -613,6 +618,7 @@ body.menu-open {
   font-weight: 800;
   letter-spacing: -0.01em;
   line-height: 1.15;
+  padding-bottom: 20px;
 }
 
 .trust-images {
@@ -669,6 +675,13 @@ body.menu-open {
   font-size: 16px;
   line-height: 1.6;
   max-width: 480px;
+}
+
+@media (max-width: 700px) {
+  .trust-copy {
+    flex-direction: column;
+    gap: 14px;
+  }
 }
 
 @media (min-width: 900px) {
@@ -981,7 +994,7 @@ body.menu-open {
   align-items: center;
   background: var(--cream);
   border-radius: var(--radius-lg);
-  padding: 36px;
+  padding: 36px 10px;
 }
 
 .testi-quote {
@@ -1333,37 +1346,38 @@ body.menu-open {
 
 @media (max-width: 700px) {
   .footer {
-    padding-top: 48px;
-    margin-top: 56px;
+    padding-top: 56px;
+    margin-top: 64px;
   }
 
   .footer-top {
     flex-direction: column;
     align-items: flex-start;
-    gap: 20px;
-    padding-bottom: 24px;
+    gap: 24px;
+    padding-bottom: 28px;
   }
 
   .footer-nav {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 4px 20px;
-    padding-top: 8px;
-    padding-bottom: 16px;
+    gap: 10px 24px;
+    padding-top: 20px;
+    padding-bottom: 24px;
   }
 
   .footer-nav a {
-    padding: 11px 0;
-    font-size: 15px;
+    padding: 13px 0;
+    font-size: 15.5px;
     border-bottom: none;
   }
 
   .footer-bottom {
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
-    padding-top: 20px;
-    padding-bottom: 28px;
+    gap: 16px;
+    padding-top: 28px;
+    padding-bottom: 32px;
+    line-height: 1.6;
   }
 }
 
@@ -1475,7 +1489,9 @@ body.menu-open {
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 26px 22px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .stat-card:hover {
@@ -1522,7 +1538,10 @@ body.menu-open {
   gap: 6px;
   text-align: center;
   min-height: 110px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .client-tile:hover {
@@ -1570,7 +1589,9 @@ body.menu-open {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 .value-card:hover {
@@ -1717,7 +1738,9 @@ body.menu-open {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 .testi-tile:hover {
@@ -1826,10 +1849,6 @@ body.menu-open {
 }
 
 .contact-form {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 32px;
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -1860,10 +1879,12 @@ body.menu-open {
   border-radius: var(--radius-sm);
   padding: 12px 14px;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
   color: var(--text);
   background: var(--white);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .form-field input:focus,

@@ -20,12 +20,15 @@ export default function KontaktPage() {
             Razgovarajmo o vašoj sledećoj pošiljci
           </h1>
           <p className="hero-anim" style={{ animationDelay: "160ms" }}>
-            Popunite formu ili nas kontaktirajte direktno — naš tim za
-            podršku dostupan je 24/7 za sva pitanja i ponude.
+            Popunite formu ili nas kontaktirajte direktno — naš tim za podršku
+            dostupan je 24/7 za sva pitanja i ponude.
           </p>
         </div>
         <div className="wrap">
-          <div className="hero-image hero-anim" style={{ animationDelay: "280ms" }}>
+          <div
+            className="hero-image hero-anim"
+            style={{ animationDelay: "280ms" }}
+          >
             <img
               src="/images/kontakt-support.jpg"
               alt="Korisnička podrška na poziv"

@@ -1,98 +1,62 @@
 import type { Metadata } from "next";
-import { FiMapPin, FiPhone, FiMail, FiClock } from "react-icons/fi";
 import ContactForm from "../components/ContactForm";
+import PageHero from "../components/PageHero";
+import { site } from "../lib/site";
 
 export const metadata: Metadata = {
-  title: "Kontakt — Karapandžić d.o.o.",
+  title: "Kontakt",
   description:
-    "Kontaktirajte Karapandžić d.o.o. za ponudu za drumski, pomorski ili vazdušni transport. Odgovaramo u najkraćem roku.",
+    "Zatražite ponudu za drumski transport — pošaljite relaciju i količinu robe. QuinceLogistics odgovara najčešće istog radnog dana.",
 };
 
 export default function KontaktPage() {
+  const { address } = site;
+
   return (
     <>
-      <section className="page-hero">
-        <div className="wrap page-hero-inner">
-          <span className="eyebrow hero-anim" style={{ animationDelay: "0ms" }}>
-            Kontakt
-          </span>
-          <h1 className="hero-anim" style={{ animationDelay: "80ms" }}>
-            Razgovarajmo o vašoj sledećoj pošiljci
-          </h1>
-          <p className="hero-anim" style={{ animationDelay: "160ms" }}>
-            Popunite formu ili nas kontaktirajte direktno — naš tim za podršku
-            dostupan je 24/7 za sva pitanja i ponude.
-          </p>
-        </div>
-        <div className="wrap">
-          <div
-            className="hero-image hero-anim"
-            style={{ animationDelay: "280ms" }}
-          >
-            <img
-              src="/images/kontakt-support.jpg"
-              alt="Korisnička podrška na poziv"
-            />
-          </div>
-        </div>
-      </section>
+      <PageHero
+        label="Kontakt"
+        title="Pošaljite relaciju. Javljamo se sa cenom."
+        lead="Za ponudu su nam dovoljna tri podatka: odakle, dokle i šta vozimo. Odgovaramo najčešće istog radnog dana."
+      />
 
-      <section className="section">
-        <div className="wrap">
-          <div className="contact-grid">
-            <div className="contact-info">
-              <div className="contact-info-card" data-reveal>
-                <div className="contact-info-icon">
-                  <FiMapPin size={20} />
-                </div>
-                <div>
-                  <h3>Adresa</h3>
-                  <p>Industrijska zona bb, 11000 Beograd, Srbija</p>
-                </div>
-              </div>
-              <div
-                className="contact-info-card"
-                data-reveal
-                style={{ transitionDelay: "70ms" }}
-              >
-                <div className="contact-info-icon">
-                  <FiPhone size={20} />
-                </div>
-                <div>
-                  <h3>Telefon</h3>
-                  <p>+381 11 123 4567</p>
-                </div>
-              </div>
-              <div
-                className="contact-info-card"
-                data-reveal
-                style={{ transitionDelay: "140ms" }}
-              >
-                <div className="contact-info-icon">
-                  <FiMail size={20} />
-                </div>
-                <div>
-                  <h3>Email</h3>
-                  <p>info@karapandzic-logistika.rs</p>
-                </div>
-              </div>
-              <div
-                className="contact-info-card"
-                data-reveal
-                style={{ transitionDelay: "210ms" }}
-              >
-                <div className="contact-info-icon">
-                  <FiClock size={20} />
-                </div>
-                <div>
-                  <h3>Radno vreme</h3>
-                  <p>Podrška za praćenje pošiljki dostupna 24/7</p>
-                </div>
-              </div>
+      <section className="section section-flush">
+        <div className="wrap contact-grid">
+          <aside className="contact-info" data-reveal>
+            <div className="contact-block">
+              <p className="label">Dispečer</p>
+              <a href={site.phone.href} className="contact-phone">
+                {site.phone.display}
+              </a>
             </div>
+            <div className="contact-block">
+              <p className="label">Email</p>
+              <a href={`mailto:${site.email}`} className="contact-link">
+                {site.email}
+              </a>
+            </div>
+            <div className="contact-block">
+              <p className="label">Adresa</p>
+              <address>
+                {address.street}
+                <br />
+                {address.postalCode} {address.city}, {address.country}
+              </address>
+            </div>
+            <div className="contact-block">
+              <p className="label">Radno vreme</p>
+              <dl className="hours">
+                {site.hours.map((h) => (
+                  <div key={h.days}>
+                    <dt>{h.days}</dt>
+                    <dd>{h.time}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </aside>
 
-            <ContactForm />
-          </div>
+          <ContactForm />
         </div>
       </section>
     </>

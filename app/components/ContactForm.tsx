@@ -1,7 +1,11 @@
 "use client";
 
-import { useState, FormEvent } from "react";
-import { FiCheck } from "react-icons/fi";
+import { useState, type FormEvent } from "react";
+import { FiArrowUpRight, FiCheck } from "react-icons/fi";
+import { Choices, Field } from "./FormParts";
+import { site } from "../lib/site";
+
+const LOAD_TYPES = ["Ceo kamion (FTL)", "Zbirni transport (LTL)", "Još ne znam"];
 
 export default function ContactForm() {
   const [sent, setSent] = useState(false);
@@ -13,74 +17,101 @@ export default function ContactForm() {
 
   if (sent) {
     return (
-      <div className="contact-form">
-        <div className="form-success">
-          <FiCheck size={18} />
-          Hvala! Vaša poruka je zabeležena — javićemo se u najkraćem roku.
-        </div>
-        <p className="form-note">
-          Za hitne upite možete nas kontaktirati direktno na
-          info@karapandzic-logistika.rs ili putem telefona.
+      <div className="quote-form quote-sent" role="status">
+        <span className="quote-sent-icon">
+          <FiCheck size={24} />
+        </span>
+        <h2>Hvala, upit je zabeležen.</h2>
+        <p>
+          Javljamo se sa ponudom u najkraćem roku. Za hitne ture pozovite
+          dispečera na <a href={site.phone.href}>{site.phone.display}</a> ili
+          pišite na <a href={`mailto:${site.email}`}>{site.email}</a>.
         </p>
       </div>
     );
   }
 
   return (
-    <form className="contact-form" data-reveal onSubmit={handleSubmit}>
-      <div className="form-row two">
-        <div className="form-field">
-          <label htmlFor="ime">Ime i prezime</label>
-          <input
-            id="ime"
-            name="ime"
-            type="text"
-            placeholder="Vaše ime"
+    <form className="quote-form" data-reveal onSubmit={handleSubmit}>
+      <fieldset>
+        <legend className="label">
+          Relacija i roba
+        </legend>
+        <div className="form-row">
+          <Field
+            id="utovar"
+            label="Mesto utovara"
+            placeholder="npr. Beograd, Srbija"
+            required
+          />
+          <Field
+            id="istovar"
+            label="Mesto istovara"
+            placeholder="npr. Minhen, Nemačka"
             required
           />
         </div>
-        <div className="form-field">
-          <label htmlFor="email">Email adresa</label>
-          <input
+        <div className="form-row">
+          <Field
+            id="kolicina"
+            label="Količina robe"
+            placeholder="npr. 12 paleta, 8 t"
+          />
+          <Field id="datum" label="Datum utovara" type="date" />
+        </div>
+        <Choices
+          name="vrsta"
+          legend="Vrsta prevoza"
+          options={LOAD_TYPES}
+          defaultValue={LOAD_TYPES[0]}
+        />
+      </fieldset>
+
+      <fieldset>
+        <legend className="label">
+          Kontakt
+        </legend>
+        <div className="form-row">
+          <Field id="ime" label="Ime i prezime" autoComplete="name" required />
+          <Field id="firma" label="Firma" autoComplete="organization" />
+        </div>
+        <div className="form-row">
+          <Field
             id="email"
-            name="email"
+            label="Email"
             type="email"
-            placeholder="vas@email.com"
+            placeholder="vas@firma.rs"
+            autoComplete="email"
             required
           />
+          <Field
+            id="telefon"
+            label="Telefon"
+            type="tel"
+            placeholder="+381 6x xxx xxxx"
+            autoComplete="tel"
+          />
         </div>
-      </div>
+        <div className="form-field">
+          <label htmlFor="napomena">Napomena</label>
+          <textarea
+            id="napomena"
+            name="napomena"
+            rows={4}
+            placeholder="Vrsta robe, dimenzije, način utovara, posebni zahtevi…"
+          />
+        </div>
+      </fieldset>
 
-      <div className="form-field">
-        <label htmlFor="telefon">Telefon</label>
-        <input
-          id="telefon"
-          name="telefon"
-          type="tel"
-          placeholder="+381 6x xxx xxxx"
-        />
+      <div className="form-submit">
+        <button type="submit" className="btn btn-primary">
+          Pošaljite upit
+          <FiArrowUpRight size={18} aria-hidden="true" />
+        </button>
+        <p className="form-note">
+          Podatke koristimo isključivo za pripremu ponude.
+        </p>
       </div>
-
-      <div className="form-field">
-        <label htmlFor="poruka">Poruka</label>
-        <textarea
-          id="poruka"
-          name="poruka"
-          placeholder="Opišite vašu pošiljku ili upit..."
-          required
-        />
-      </div>
-
-      <button
-        type="submit"
-        className="btn btn-primary"
-        style={{ alignSelf: "flex-start" }}
-      >
-        Pošalji upit
-      </button>
-      <p className="form-note">
-        Popunjavanjem forme prihvatate da vas kontaktiramo povodom vašeg upita.
-      </p>
     </form>
   );
 }

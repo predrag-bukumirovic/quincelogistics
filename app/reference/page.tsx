@@ -1,174 +1,114 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { FiArrowRight } from "react-icons/fi";
+import CtaBand from "../components/CtaBand";
+import PageHero from "../components/PageHero";
+import SectionHead from "../components/SectionHead";
+import Testimonials from "../components/Testimonials";
 
 export const metadata: Metadata = {
-  title: "Reference — Karapandžić d.o.o.",
+  title: "Reference",
   description:
-    "Kompanije koje su poverile svoj lanac snabdevanja Karapandžić d.o.o. — od e-trgovine do teške industrije.",
+    "Primeri drumskih tura koje QuinceLogistics vozi za proizvodne i trgovinske firme — redovne linije ka EU, dopuna stovarišta i isporuke u zakazanim terminima.",
 };
 
-const clients = [
-  { name: "Global Trade Co.", tag: "Uvoz-izvoz" },
-  { name: "Nordic Foods", tag: "Prehrambena industrija" },
-  { name: "Petrović Gradnja", tag: "Građevinarstvo" },
-  { name: "Butik Radovanović", tag: "E-trgovina" },
-  { name: "AutoParts Plus", tag: "Auto industrija" },
-  { name: "Fresh Market", tag: "Maloprodaja" },
-  { name: "BalkanSteel", tag: "Metalna industrija" },
-  { name: "Vinarija Sunčani Breg", tag: "Hrana i piće" },
+const cases = [
+  {
+    client: "Proizvođač nameštaja",
+    title: "Redovna linija Srbija – Nemačka",
+    meta: [
+      ["Relacija", "Čačak → Štutgart"],
+      ["Učestalost", "dva puta nedeljno"],
+      ["Usluga", "Kompletni utovari (FTL)"],
+    ],
+    text: [
+      "Klijent izvozi tapacirani nameštaj u Nemačku i ranije je svaku turu ugovarao posebno — sa različitim prevoznicima i rokovima koji su se menjali iz nedelje u nedelju.",
+      "Uveli smo fiksne termine utovara i stalnog dispečera za liniju. Kupci u Nemačkoj sada unapred znaju kada roba stiže, a klijent planira proizvodnju prema tim terminima.",
+    ],
+  },
+  {
+    client: "Distributer građevinskog materijala",
+    title: "Dopuna stovarišta u sezoni gradnje",
+    meta: [
+      ["Relacija", "Novi Sad → Vojvodina i Beograd"],
+      ["Učestalost", "svakodnevno, mart – novembar"],
+      ["Usluga", "Domaći i zbirni transport"],
+    ],
+    text: [
+      "U sezoni stovarišta ostaju bez robe brže nego što stigne nova narudžbina. Najveći problem nije bila cena prevoza, već kamion koji nije tu kada je potreban.",
+      "Organizovali smo dnevne ture sa istovarom na više stovarišta u jednom prolazu. Narudžbina primljena do 14 časova vozi se sledećeg jutra.",
+    ],
+  },
+  {
+    client: "Proizvođač auto-delova",
+    title: "Isporuke u zakazanim terminima",
+    meta: [
+      ["Relacija", "Kragujevac → Bratislava"],
+      ["Učestalost", "tri puta nedeljno"],
+      ["Usluga", "Međunarodni transport"],
+    ],
+    text: [
+      "Kupac klijenta prima robu samo u zakazanom terminu na rampi — kašnjenje od sat vremena znači novo zakazivanje i zastoj na proizvodnoj liniji.",
+      "Ture planiramo unazad od termina istovara, sa rezervom za granicu. Dokumentaciju usklađujemo sa špediterom klijenta dan ranije, da kamion ne čeka na carini.",
+    ],
+  },
 ];
 
 export default function ReferencePage() {
   return (
     <>
-      <section className="page-hero">
-        <div className="wrap page-hero-inner">
-          <span className="eyebrow hero-anim" style={{ animationDelay: "0ms" }}>
-            Reference
-          </span>
-          <h1 className="hero-anim" style={{ animationDelay: "80ms" }}>
-            Kompanije koje nam veruju
-          </h1>
-          <p className="hero-anim" style={{ animationDelay: "160ms" }}>
-            Od malih porodičnih radnji do regionalnih industrijskih igrača —
-            ovo su neki od klijenata čiji lanac snabdevanja svakodnevno
-            pokrivamo.
-          </p>
-        </div>
+      <PageHero
+        label="Reference"
+        title="Ture koje vozimo iz nedelje u nedelju."
+        lead="Imena klijenata ne objavljujemo bez njihove dozvole — ali posao koji radimo za njih rado opisujemo."
+      />
+
+      <section className="section section-flush">
         <div className="wrap">
-          <div className="hero-image hero-anim" style={{ animationDelay: "280ms" }}>
-            <img
-              src="/images/reliability-truck.jpg"
-              alt="Kamion na otvorenom putu"
-            />
-          </div>
+          <SectionHead
+            label="Iz prakse"
+            title="Tri klijenta, tri vrste prevoza."
+          />
+          {cases.map((c) => (
+            <article className="case" key={c.title}>
+              <dl className="specs case-meta" data-reveal>
+                <div>
+                  <dt>Klijent</dt>
+                  <dd>{c.client}</dd>
+                </div>
+                {c.meta.map(([k, v]) => (
+                  <div key={k}>
+                    <dt>{k}</dt>
+                    <dd>{v}</dd>
+                  </div>
+                ))}
+              </dl>
+              <div className="case-body" data-reveal>
+                <h3 className="case-title">{c.title}</h3>
+                {c.text.map((p) => (
+                  <p key={p}>{p}</p>
+                ))}
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
-      <section className="section">
+      <section className="section section-dark">
         <div className="wrap">
-          <div className="stats-row" data-reveal>
-            <div className="stat-card">
-              <strong>10+</strong>
-              <span>Godina iskustva</span>
-            </div>
-            <div className="stat-card">
-              <strong>45k+</strong>
-              <span>Isporučenih pošiljki</span>
-            </div>
-            <div className="stat-card">
-              <strong>30+</strong>
-              <span>Zemalja pokrivenosti</span>
-            </div>
-            <div className="stat-card">
-              <strong>50+</strong>
-              <span>Aktivnih partnerstava</span>
-            </div>
-          </div>
+          <SectionHead
+            label="Iskustva"
+            title="Šta kažu oni čiju robu vozimo."
+          />
+          <Testimonials />
         </div>
       </section>
 
-      <section className="section section-cream">
-        <div className="wrap">
-          <h2 className="reliability-heading" data-reveal>
-            Neki od klijenata sa kojima sarađujemo
-          </h2>
-
-          <div className="client-grid">
-            {clients.map((c, i) => (
-              <div
-                className="client-tile"
-                data-reveal
-                key={c.name}
-                style={{ transitionDelay: `${(i % 4) * 60}ms` }}
-              >
-                <strong>{c.name}</strong>
-                <span>{c.tag}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="wrap">
-          <div className="service-detail">
-            <div className="split">
-              <div className="split-image" data-reveal>
-                <img
-                  src="/images/reliability-truck.jpg"
-                  alt="Kamion na putu u zalasku sunca"
-                />
-              </div>
-              <div
-                className="split-content"
-                data-reveal
-                style={{ transitionDelay: "90ms" }}
-              >
-                <h2>Nordic Foods — rashladni lanac bez prekida</h2>
-                <p>
-                  Za distributera prehrambenih proizvoda organizovali smo
-                  redovan rashladni transport preko više graničnih prelaza,
-                  uz kontinuiranu kontrolu temperature od utovara do
-                  isporuke.
-                </p>
-                <p>
-                  Rezultat je stabilan raspored isporuka koji im omogućava
-                  da planiraju zalihe bez straha od kašnjenja ili
-                  neusklađenog temperaturnog režima.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="service-detail">
-            <div className="split split-reverse">
-              <div className="split-image" data-reveal>
-                <img
-                  src="/images/warehouse-interior.jpg"
-                  alt="Unutrašnjost magacina sa viljuškarom"
-                />
-              </div>
-              <div
-                className="split-content"
-                data-reveal
-                style={{ transitionDelay: "90ms" }}
-              >
-                <h2>AutoParts Plus — isporuke po JIT modelu</h2>
-                <p>
-                  Proizvođaču auto delova obezbeđujemo just-in-time dostavu
-                  komponenti direktno na proizvodnu liniju, uz drumski
-                  transport za redovne rute i vazdušni za hitne pošiljke.
-                </p>
-                <p>
-                  Kombinacijom oba vida transporta klijent izbegava zastoje
-                  u proizvodnji, bez obzira na obim ili hitnost narudžbine.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section section-cream">
-        <div className="cta" data-reveal>
-          <div className="cta-body">
-            <h2>Želite da vaša kompanija bude sledeća?</h2>
-            <p>
-              Pridružite se klijentima koji su svoj lanac snabdevanja
-              poverili Karapandžić timu — zatražite ponudu bez obaveze.
-            </p>
-            <Link href="/kontakt" className="btn btn-primary">
-              Zatražite ponudu
-              <FiArrowRight className="btn-arrow" size={16} />
-            </Link>
-          </div>
-          <div className="cta-image">
-            <img src="/images/cta-truck.jpg" alt="Narandžasti kamion" />
-          </div>
-        </div>
-      </section>
+      <CtaBand
+        title={
+          <>
+            Sledeća tura <em>može biti vaša.</em>
+          </>
+        }
+      />
     </>
   );
 }

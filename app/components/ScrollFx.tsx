@@ -9,12 +9,11 @@ export default function ScrollFx() {
   useEffect(() => {
     const header = document.querySelector(".site-header");
     const onScroll = () => {
-      if (header) header.classList.toggle("scrolled", window.scrollY > 8);
+      header?.classList.toggle("scrolled", window.scrollY > 40);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    const revealEls = Array.from(document.querySelectorAll("[data-reveal]"));
     const revealIo = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -24,42 +23,15 @@ export default function ScrollFx() {
           }
         });
       },
-      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
     );
-    revealEls.forEach((el) => revealIo.observe(el));
-
-    const counterEls = Array.from(
-      document.querySelectorAll<HTMLElement>("[data-counter]")
-    );
-    const counterIo = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const el = entry.target as HTMLElement;
-          const target = parseInt(el.dataset.counter || "0", 10);
-          const suffix = el.dataset.counterSuffix || "";
-          const duration = 1300;
-          const start = performance.now();
-
-          const step = (now: number) => {
-            const progress = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            el.textContent = Math.round(eased * target) + suffix;
-            if (progress < 1) requestAnimationFrame(step);
-          };
-
-          requestAnimationFrame(step);
-          counterIo.unobserve(el);
-        });
-      },
-      { threshold: 0.6 }
-    );
-    counterEls.forEach((el) => counterIo.observe(el));
+    document
+      .querySelectorAll("[data-reveal]:not(.in-view)")
+      .forEach((el) => revealIo.observe(el));
 
     return () => {
       window.removeEventListener("scroll", onScroll);
       revealIo.disconnect();
-      counterIo.disconnect();
     };
   }, [pathname]);
 

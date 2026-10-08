@@ -1,315 +1,198 @@
+import Image from "next/image";
 import Link from "next/link";
-import {
-  FiClock,
-  FiRadio,
-  FiGlobe,
-  FiMessageCircle,
-  FiArrowRight,
-  FiTruck,
-} from "react-icons/fi";
-import Faq from "./components/Faq";
+import { FiArrowRight, FiArrowUpRight } from "react-icons/fi";
+import heroImg from "@/public/images/hero-main.jpg";
+import duskImg from "@/public/images/service-road.jpg";
+import highwayImg from "@/public/images/reliability-truck.jpg";
+import CtaBand from "./components/CtaBand";
+import FaqSection from "./components/FaqSection";
+import Marquee from "./components/Marquee";
+import Photo from "./components/Photo";
+import SectionHead from "./components/SectionHead";
+import Steps from "./components/Steps";
 import Testimonials from "./components/Testimonials";
+import { reasons, services } from "./lib/content";
+import { site } from "./lib/site";
 
 export default function Home() {
   return (
     <>
       <section className="hero">
         <div className="wrap">
-          <div className="hero-top">
-            <h1
-              className="hero-heading hero-anim"
-              style={{ animationDelay: "0ms" }}
-            >
-              Transport & Logistika
-            </h1>
-            <div className="hero-row">
-              <div
-                className="hero-thumb hero-anim"
-                style={{ animationDelay: "80ms" }}
-              >
-                <img
-                  src="/images/hero-thumb.jpg"
-                  alt="Kontejneri i teretno vozilo"
-                />
-              </div>
-              <div
-                className="hero-side hero-anim"
-                style={{ animationDelay: "180ms" }}
-              >
-                <p>
-                  Naša integrisana logistička rešenja obezbeđuju dosledne i
-                  pouzdane performanse.
-                </p>
-                <Link href="/kontakt" className="btn btn-primary">
-                  Zatražite ponudu
-                  <FiArrowRight className="btn-arrow" size={16} />
-                </Link>
-              </div>
-            </div>
+          <div className="hero-kicker hero-anim">
+            <span>Drumski transport robe</span>
+            <span>Srbija · Region · EU</span>
           </div>
-
-          <div
-            className="hero-meta hero-anim"
-            style={{ animationDelay: "260ms" }}
-          >
-            <div className="avatar-stack">
-              <img src="/images/avatar1.jpg" alt="Klijent" />
-              <img src="/images/avatar2.jpg" alt="Klijent" />
-              <img src="/images/avatar3.jpg" alt="Klijent" />
-            </div>
-            <div className="stat">
-              <strong data-counter="45" data-counter-suffix="k+">
-                0k+
-              </strong>
-              <span>Zadovoljnih klijenata</span>
+          <h1 className="hero-title">
+            <span className="hero-line">
+              <span className="hero-line-inner">Od rampe</span>
+              <span className="route" aria-hidden="true" />
+            </span>
+            <span className="hero-line hero-line-end">
+              <span className="route" aria-hidden="true" />
+              <span className="hero-line-inner">do rampe.</span>
+            </span>
+          </h1>
+          <div className="hero-foot hero-anim" style={{ animationDelay: "260ms" }}>
+            <p className="lead">
+              Domaći i međunarodni drumski transport — kompletni i zbirni
+              utovari za firme iz Srbije, regiona i EU. Jedan dispečer prati
+              vašu turu od utovara do istovara.
+            </p>
+            <div className="hero-actions">
+              <Link href="/kontakt" className="btn btn-primary">
+                Zatražite ponudu
+                <FiArrowUpRight size={18} aria-hidden="true" />
+              </Link>
+              <a href={site.phone.href} className="btn btn-line">
+                {site.phone.display}
+              </a>
             </div>
           </div>
         </div>
 
+        <div className="hero-media">
+          <div className="hero-photo">
+            <Image
+              src={heroImg}
+              alt="Šleper na otvorenom putu"
+              fill
+              preload
+              placeholder="blur"
+              sizes="100vw"
+            />
+          </div>
+          <div className="wrap hero-strip-wrap">
+            <ul className="hero-strip">
+              {services.map((s) => (
+                <li key={s.id}>
+                  <Link href={`/usluge#${s.id}`}>
+                    <span className="hero-strip-num">{s.tag}</span>
+                    <strong>{s.title}</strong>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
         <div className="wrap">
-          <div
-            className="hero-image hero-anim"
-            style={{ animationDelay: "340ms" }}
-          >
-            <img
-              src="/images/hero-main.jpg"
-              alt="Kamion na putu u zalasku sunca"
+          <SectionHead
+            label="Ko smo mi"
+            title={
+              <>
+                <span className="muted">
+                  Ne vozimo brodove, avione ni vozove.
+                </span>{" "}
+                Samo kamione — i zato svaku turu planiramo do poslednje palete.
+              </>
+            }
+          />
+          <div className="about-grid">
+            <div className="about-copy" data-reveal>
+              <p>
+                QuinceLogistics je transportna firma iz Srbije specijalizovana
+                za drumski prevoz robe. Radimo sa proizvodnim, trgovinskim i
+                građevinskim firmama kojima je važno da roba stigne kada je
+                dogovoreno — i da u svakom trenutku znaju gde je.
+              </p>
+              <Link href="/o-nama" className="link-arrow">
+                Više o nama
+                <FiArrowRight size={16} aria-hidden="true" />
+              </Link>
+            </div>
+            <Photo
+              src={duskImg}
+              alt="Kamion u vožnji u sumrak"
+              ratio="4 / 5"
+              sizes="(min-width: 1000px) 34vw, 100vw"
+              className="about-photo"
             />
           </div>
         </div>
       </section>
 
-      <section className="section section-cream">
-        <div className="wrap trust">
-          <div className="trust-grid">
-            <h2 className="trust-heading" data-reveal>
-              Izgrađeni na poverenju i pouzdanosti
-            </h2>
-            <div
-              className="trust-copy"
-              data-reveal
-              style={{ transitionDelay: "80ms" }}
-            >
-              <div className="trust-copy-icon">
-                <FiTruck size={22} color="#ffffff" />
-              </div>
-              <p>
-                Sa dugogodišnjim iskustvom u logistici, pojednostavljujemo
-                složene lance snabdevanja kombinujući pametno planiranje,
-                savremenu tehnologiju i pouzdan transport.
-              </p>
-            </div>
-          </div>
-
-          <div className="trust-images">
-            <div className="trust-img-small" data-reveal>
-              <img src="/images/trust-ship.jpg" alt="Kontejnerski brod" />
-            </div>
-            <div
-              className="trust-img-large"
-              data-reveal
-              style={{ transitionDelay: "120ms" }}
-            >
-              <img
-                src="/images/trust-loading.jpg"
-                alt="Utovar kontejnera na kamion"
-              />
-            </div>
-          </div>
+      <section className="section section-white">
+        <div className="wrap">
+          <SectionHead
+            label="Usluge"
+            title="Četiri vrste prevoza. Sve kamionom."
+            lead="Od jedne palete do punog šlepera, po Srbiji ili preko granice — birate prevoz prema količini robe i roku."
+          />
+          <ul className="svc-list">
+            {services.map((s) => (
+              <li key={s.id} data-reveal>
+                <Link href={`/usluge#${s.id}`} className="svc-row">
+                  <span className="svc-title">
+                    <small>{s.tag}</small>
+                    {s.title}
+                  </span>
+                  <span className="svc-text">{s.short}</span>
+                  <span className="svc-arrow" aria-hidden="true">
+                    <FiArrowUpRight size={20} />
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
       <section className="section">
         <div className="wrap">
-          <h2 className="reliability-heading" data-reveal>
-            Pouzdana logistika kakvu zaslužujete
-          </h2>
-
-          <div className="reliability-grid">
-            <div className="rel-card rel-card-dark" data-reveal>
-              <div className="rel-icon">
-                <FiClock size={22} color="#ffffff" />
-              </div>
-              <div>
-                <h3>10+ godina iskustva</h3>
-                <p>
-                  Sa dugogodišnjim iskustvom u logistici pružamo brzu, pouzdanu
-                  i efikasnu dostavu.
-                </p>
-              </div>
-            </div>
-
-            <div
-              className="rel-image"
-              data-reveal
-              style={{ transitionDelay: "90ms" }}
-            >
-              <img
-                src="/images/reliability-truck.jpg"
-                alt="Kamion na otvorenom putu"
-              />
-            </div>
-
-            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-              <div
-                className="rel-card rel-card-light"
-                data-reveal
-                style={{ transitionDelay: "60ms" }}
-              >
-                <div className="rel-icon alt">
-                  <FiRadio size={20} color="#e2601f" />
-                </div>
-                <div>
-                  <h3>Praćenje uživo</h3>
-                  <p>
-                    Naš napredni sistem obezbeđuje praćenje pošiljki u realnom
-                    vremenu.
-                  </p>
-                </div>
-              </div>
-              <div
-                className="rel-card rel-card-light"
-                data-reveal
-                style={{ transitionDelay: "140ms" }}
-              >
-                <div className="rel-icon alt">
-                  <FiGlobe size={20} color="#e2601f" />
-                </div>
-                <div>
-                  <h3>Globalni partner</h3>
-                  <p>
-                    Sarađujemo sa proverenim prevoznicima i logističkim
-                    partnerima širom sveta.
-                  </p>
-                </div>
-              </div>
-              <div
-                className="rel-card rel-card-light"
-                data-reveal
-                style={{ transitionDelay: "220ms" }}
-              >
-                <div className="rel-icon alt">
-                  <FiMessageCircle size={20} color="#e2601f" />
-                </div>
-                <div>
-                  <h3>Podrška korisnicima</h3>
-                  <p>
-                    Naš tim za podršku dostupan je 24/7 za sva pitanja i
-                    praćenje pošiljki.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <SectionHead
+            label="Kako radimo"
+            title="Od upita do potpisanog CMR-a."
+          />
+          <Steps />
         </div>
       </section>
 
-      <section className="section section-cream">
-        <div className="wrap">
-          <div className="services-head" data-reveal>
-            <h2>Pružamo najbolje logističke usluge</h2>
-            <p>
-              Doživite pouzdanu i efikasnu logistiku prilagođenu bezbednom
-              prevozu vaše robe — vazdušnim, pomorskim ili drumskim putem.
+      <Marquee />
+
+      <section className="section">
+        <div className="wrap why-grid">
+          <Photo
+            src={highwayImg}
+            alt="Šleper na autoputu pod oblačnim nebom"
+            ratio="5 / 4"
+            sizes="(min-width: 1000px) 50vw, 100vw"
+            className="why-photo"
+          />
+          <div className="why-body" data-reveal>
+            <p className="label">
+              Zašto Quince
             </p>
-            <Link
-              href="/usluge"
-              className="btn btn-primary"
-              style={{ alignSelf: "flex-start" }}
-            >
-              Pogledaj sve usluge
-              <FiArrowRight className="btn-arrow" size={16} />
-            </Link>
-          </div>
-
-          <div className="services-grid">
-            <div className="service-card service-card-large" data-reveal>
-              <img src="/images/service-air.jpg" alt="Vazdušni transport" />
-              <div className="service-card-body">
-                <h3>Vazdušni transport</h3>
-                <p>
-                  Pouzdane usluge vazdušnog transporta koje kombinuju brzinu,
-                  sigurnost i praćenje pošiljki širom sveta.
-                </p>
-              </div>
-            </div>
-            <div
-              className="service-card"
-              data-reveal
-              style={{ transitionDelay: "90ms" }}
-            >
-              <img src="/images/service-ocean.jpg" alt="Pomorski transport" />
-              <div className="service-card-body">
-                <h3>Pomorski transport</h3>
-                <p>
-                  Pouzdan i isplativ prevoz robe brodom širom sveta, uz bezbednu
-                  i tačnu dostavu.
-                </p>
-              </div>
-            </div>
-            <div
-              className="service-card"
-              data-reveal
-              style={{ transitionDelay: "180ms" }}
-            >
-              <img src="/images/service-road.jpg" alt="Drumski transport" />
-              <div className="service-card-body">
-                <h3>Drumski transport</h3>
-                <p>
-                  Efikasna i pouzdana drumska rešenja za prevoz robe sigurno
-                  širom gradova i država.
-                </p>
-              </div>
-            </div>
+            <h2 className="title">Manje poziva. Više isporuka na vreme.</h2>
+            <ul className="reasons">
+              {reasons.map((r) => (
+                <li key={r.title}>
+                  <div>
+                    <h3>{r.title}</h3>
+                    <p>{r.text}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
 
-      <section className="section">
+      <section className="section section-dark">
         <div className="wrap">
+          <SectionHead
+            label="Iskustva"
+            title="Šta kažu oni čiju robu vozimo."
+          />
           <Testimonials />
         </div>
       </section>
 
-      <section className="section section-cream">
-        <div className="wrap">
-          <div className="faq-top" data-reveal>
-            <h2>Često postavljana pitanja</h2>
-            <p>
-              Pronađite jasne odgovore na najčešća pitanja o našim uslugama
-              transporta, praćenja i dostave.
-            </p>
-          </div>
+      <FaqSection />
 
-          <div className="faq-grid">
-            <div className="faq-image" data-reveal>
-              <img src="/images/faq-truck.jpg" alt="Kamion na putu" />
-            </div>
-
-            <Faq />
-          </div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="cta" data-reveal>
-          <div className="cta-body">
-            <h2>Pridružite se hiljadama za prevoz robe</h2>
-            <p>
-              Uživajte u bržim isporukama, pametnijem rutiranju i potpunoj
-              transparentnosti. Postanite naš partner i unapredite svoju
-              logistiku već danas.
-            </p>
-            <Link href="/kontakt" className="btn btn-primary">
-              Započnite odmah
-              <FiArrowRight className="btn-arrow" size={16} />
-            </Link>
-          </div>
-          <div className="cta-image">
-            <img src="/images/cta-truck.jpg" alt="Narandžasti kamion" />
-          </div>
-        </div>
-      </section>
+      <CtaBand />
     </>
   );
 }

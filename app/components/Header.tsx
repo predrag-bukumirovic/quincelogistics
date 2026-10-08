@@ -3,93 +3,111 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
+import { FiArrowRight, FiArrowUpRight, FiMenu, FiX } from "react-icons/fi";
 import Logo from "./Logo";
+import { navLinks, site } from "../lib/site";
 
-const NAV_LINKS = [
-  { href: "/", label: "Početna" },
-  { href: "/o-nama", label: "O nama" },
-  { href: "/usluge", label: "Usluge" },
-  { href: "/resenja", label: "Rešenja" },
-  { href: "/reference", label: "Reference" },
-];
+const MOBILE_LINKS = [...navLinks, { href: "/kontakt", label: "Kontakt" }];
 
 export default function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
+  const close = () => setOpen(false);
 
   useEffect(() => {
     document.body.classList.toggle("menu-open", open);
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
   return (
-    <header className="site-header">
-      <div className="wrap header-inner">
-        <Link href="/" className="logo">
-          <Logo />
-        </Link>
-        <nav className="nav-links">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={pathname === link.href ? "active" : ""}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-        <Link href="/kontakt" className="btn btn-outline header-cta">
-          Kontaktirajte nas
-        </Link>
-        <button
-          className="burger"
-          aria-label={open ? "Zatvori meni" : "Otvori meni"}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <HiOutlineX size={20} /> : <HiOutlineMenu size={20} />}
-        </button>
+    <>
+      <div className="topbar">
+        <div className="wrap topbar-inner">
+          <Link href="/karijera" className="topbar-hiring">
+            Zapošljavamo vozače
+            <span className="topbar-hiring-more"> C+E kategorije</span>
+            <FiArrowRight size={14} aria-hidden="true" />
+          </Link>
+          <div className="topbar-links">
+            <a href={site.phone.href}>{site.phone.display}</a>
+            <a href={`mailto:${site.email}`}>{site.email}</a>
+          </div>
+        </div>
       </div>
 
-      <div
-        className={`mobile-nav-backdrop${open ? " open" : ""}`}
-        onClick={() => setOpen(false)}
-        aria-hidden="true"
-      />
-
-      <div className={`mobile-nav${open ? " open" : ""}`}>
-        <div className="mobile-nav-top">
-          <span className="logo">
-            <Logo />
-          </span>
+      <header className="site-header">
+        <div className="wrap header-inner">
+          <Link href="/" className="logo">
+            <Logo eager />
+          </Link>
+          <nav className="nav-links" aria-label="Glavna navigacija">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={pathname === link.href ? "page" : undefined}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+          <Link href="/kontakt" className="btn btn-primary header-cta">
+            Zatražite ponudu
+            <FiArrowUpRight size={18} aria-hidden="true" />
+          </Link>
           <button
+            type="button"
             className="burger"
-            aria-label="Zatvori meni"
-            onClick={() => setOpen(false)}
+            aria-label="Otvori meni"
+            aria-expanded={open}
+            aria-controls="mobilni-meni"
+            onClick={() => setOpen(true)}
           >
-            <HiOutlineX size={20} />
+            <FiMenu size={22} />
           </button>
         </div>
-        <nav className="mobile-nav-links">
-          {NAV_LINKS.map((link) => (
+      </header>
+
+      <div
+        id="mobilni-meni"
+        className={`mobile-nav${open ? " open" : ""}`}
+        inert={!open}
+      >
+        <div className="wrap mobile-nav-top">
+          <Link href="/" className="logo" onClick={close}>
+            <Logo onDark />
+          </Link>
+          <button
+            type="button"
+            className="burger"
+            aria-label="Zatvori meni"
+            onClick={close}
+          >
+            <FiX size={22} />
+          </button>
+        </div>
+        <nav className="wrap mobile-nav-links" aria-label="Mobilna navigacija">
+          {MOBILE_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={pathname === link.href ? "active" : ""}
+              onClick={close}
+              aria-current={pathname === link.href ? "page" : undefined}
             >
               {link.label}
             </Link>
           ))}
         </nav>
-        <Link href="/kontakt" className="btn btn-primary">
-          Kontaktirajte nas
-        </Link>
+        <div className="wrap mobile-nav-foot">
+          <a href={site.phone.href}>{site.phone.display}</a>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </div>
       </div>
-    </header>
+    </>
   );
 }

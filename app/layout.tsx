@@ -1,26 +1,23 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Space_Grotesk } from "next/font/google";
+import { Barlow } from "next/font/google";
 import "./globals.css";
 import ScrollFx from "./components/ScrollFx";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
-  subsets: ["latin"],
+const barlow = Barlow({
+  variable: "--font-barlow",
+  subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600", "700", "800"],
 });
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-logo",
-  subsets: ["latin"],
-  weight: ["500", "700"],
-});
-
 export const metadata: Metadata = {
-  title: "Karapandžić d.o.o. — Transport i Logistika",
+  title: {
+    default: "QuinceLogistics — Drumski transport robe",
+    template: "%s — QuinceLogistics",
+  },
   description:
-    "Karapandžić d.o.o. — pouzdana logistička i transportna rešenja: drumski, vazdušni i pomorski transport uz AI praćenje pošiljki i podršku 24/7.",
+    "QuinceLogistics — domaći i međunarodni drumski transport robe. Kompletni (FTL) i zbirni (LTL) utovari za Srbiju, region i EU, uz jednog dispečera za celu turu.",
   robots: {
     index: false,
     follow: false,
@@ -33,11 +30,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="sr" className={`${jakarta.variable} ${spaceGrotesk.variable}`}>
+    <html
+      lang="sr"
+      className={barlow.variable}
+      data-scroll-behavior="smooth"
+    >
       <body>
+        <a href="#sadrzaj" className="skip-link">
+          Preskoči na sadržaj
+        </a>
         <ScrollFx />
         <Header />
-        {children}
+        <main id="sadrzaj">{children}</main>
         <Footer />
       </body>
     </html>

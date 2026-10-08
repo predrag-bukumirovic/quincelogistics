@@ -32,10 +32,16 @@
 }
 
 html {
-  scroll-behavior: smooth;
   background: var(--paper);
+  scrollbar-gutter: stable;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+}
+
+/* Glatko skrolovanje samo posle klika na sidro (npr. #prijava). Na html-u
+   bez uslova bi i osvežavanje strane animiralo povratak na staru poziciju. */
+html:focus-within {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -105,7 +111,6 @@ address {
 
 .section-dark :focus-visible,
 .cta-band :focus-visible,
-.mobile-nav :focus-visible,
 .marquee :focus-visible {
   outline-color: var(--white);
 }
@@ -411,9 +416,20 @@ address {
     color 0.2s var(--ease);
 }
 
-.burger:hover {
+.burger[aria-expanded="true"] {
   background: var(--ink);
   color: var(--paper);
+}
+
+@media (hover: hover) {
+  .burger:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+}
+
+body.menu-open .site-header {
+  box-shadow: none;
 }
 
 @media (min-width: 1100px) {
@@ -438,81 +454,167 @@ address {
 
 /* ---------- Mobile menu ---------- */
 
+/* Panel se otvara ispod zaglavlja; "top" se računa u Header.tsx. */
 .mobile-nav {
   position: fixed;
-  inset: 0;
-  z-index: 100;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 45;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  background: var(--ink);
-  color: var(--white);
+  overscroll-behavior: contain;
+  background: var(--paper);
+  color: var(--ink);
   clip-path: inset(0 0 100% 0);
   visibility: hidden;
   transition:
-    clip-path 0.55s var(--ease-out),
-    visibility 0s linear 0.55s;
+    clip-path 0.45s var(--ease-out),
+    visibility 0s linear 0.45s;
 }
 
 .mobile-nav.open {
   clip-path: inset(0);
   visibility: visible;
   transition:
-    clip-path 0.55s var(--ease-out),
+    clip-path 0.45s var(--ease-out),
     visibility 0s;
-}
-
-.mobile-nav-top {
-  display: flex;
-  flex: none;
-  align-items: center;
-  justify-content: space-between;
-  height: var(--header-h);
-  border-bottom: 1px solid var(--line-dark);
-}
-
-.mobile-nav .burger {
-  border-color: rgba(255, 255, 255, 0.35);
-  color: var(--white);
-}
-
-.mobile-nav .burger:hover {
-  background: var(--white);
-  color: var(--ink);
 }
 
 .mobile-nav-links {
   display: flex;
   flex-direction: column;
-  padding-top: 12px;
+  padding-top: 8px;
 }
 
 .mobile-nav-links a {
   display: flex;
-  align-items: baseline;
+  align-items: center;
+  justify-content: space-between;
   gap: 16px;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--line-dark);
-  font-size: clamp(34px, 9.6vw, 54px);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.025em;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: clamp(26px, 7.2vw, 32px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
-.mobile-nav-links a[aria-current="page"] {
-  color: var(--blue-bright);
+.mobile-nav-links a > span {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+}
+
+.mobile-nav-links svg {
+  flex: none;
+  color: var(--muted);
+  transition:
+    transform 0.35s var(--ease-out),
+    color 0.2s var(--ease);
+}
+
+.mobile-nav-links a:hover svg,
+.mobile-nav-links a:focus-visible svg {
+  color: var(--blue);
+  transform: translateX(4px);
+}
+
+.mobile-nav-links a[aria-current="page"],
+.mobile-nav-links a[aria-current="page"] svg {
+  color: var(--blue);
+}
+
+.mobile-nav-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.mobile-nav-tag::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  background: currentColor;
 }
 
 .mobile-nav-foot {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  display: grid;
+  gap: 20px;
   margin-top: auto;
-  padding-top: 32px;
-  padding-bottom: 32px;
-  font-size: 16px;
-  color: var(--muted-on-dark);
+  padding-top: 36px;
+  padding-bottom: 24px;
+}
+
+.mobile-nav-contact div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.mobile-nav-contact div:first-child {
+  border-top: 1px solid var(--line);
+}
+
+.mobile-nav-contact dt {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.mobile-nav-contact dd {
+  font-size: 17px;
+  font-weight: 500;
   font-variant-numeric: tabular-nums;
+}
+
+.mobile-nav-contact a:hover {
+  color: var(--blue);
+}
+
+.mobile-nav-cta {
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Linkovi ulaze jedan za drugim tek kada se panel otvori. */
+.mobile-nav-links a,
+.mobile-nav-foot {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.3s var(--ease),
+    transform 0.5s var(--ease-out);
+}
+
+.mobile-nav.open .mobile-nav-links a,
+.mobile-nav.open .mobile-nav-foot {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(60ms + var(--i, 7) * 30ms);
+}
+
+@media (max-height: 700px) {
+  .mobile-nav-links a {
+    padding: 12px 0;
+    font-size: 24px;
+  }
+  .mobile-nav-foot {
+    padding-top: 28px;
+  }
 }
 
 @media (min-width: 1100px) {
@@ -2253,39 +2355,38 @@ address {
   animation: fadeUp 0.9s var(--ease-out) both;
 }
 
-@media (scripting: enabled) {
-  [data-reveal] {
-    opacity: 0;
-    transform: translateY(24px);
-    transition:
-      opacity 0.8s var(--ease-out),
-      transform 0.8s var(--ease-out);
-  }
+/* Skriveni su samo elementi koje ScrollFx označi kao "ispod ekrana".
+   Ono što je vidljivo pri učitavanju ili osvežavanju ostaje na mestu. */
+[data-reveal] {
+  transition:
+    opacity 0.8s var(--ease-out),
+    transform 0.8s var(--ease-out);
+}
 
-  [data-reveal].in-view {
-    opacity: 1;
-    transform: none;
-  }
+[data-reveal].reveal-pending {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: none;
+}
 
-  .photo[data-reveal] {
-    opacity: 1;
-    transform: none;
-    clip-path: inset(14% 0 0 0);
-    transition: clip-path 1.2s var(--ease-out);
-  }
+.photo[data-reveal] {
+  transition: clip-path 1.2s var(--ease-out);
+}
 
-  .photo[data-reveal] img {
-    transform: scale(1.12);
-    transition: transform 1.6s var(--ease-out);
-  }
+.photo[data-reveal] img {
+  transition: transform 1.6s var(--ease-out);
+}
 
-  .photo[data-reveal].in-view {
-    clip-path: inset(0);
-  }
+.photo[data-reveal].reveal-pending {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(14% 0 0 0);
+  transition: none;
+}
 
-  .photo[data-reveal].in-view img {
-    transform: none;
-  }
+.photo[data-reveal].reveal-pending img {
+  transform: scale(1.12);
+  transition: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2299,7 +2400,7 @@ address {
     transition-delay: 0s !important;
   }
 
-  html {
+  html:focus-within {
     scroll-behavior: auto;
   }
 
@@ -2307,14 +2408,14 @@ address {
     animation: none;
   }
 
-  [data-reveal],
-  .photo[data-reveal] {
+  [data-reveal].reveal-pending,
+  .photo[data-reveal].reveal-pending {
     opacity: 1;
     transform: none;
     clip-path: none;
   }
 
-  .photo[data-reveal] img {
+  .photo[data-reveal].reveal-pending img {
     transform: none;
   }
 }

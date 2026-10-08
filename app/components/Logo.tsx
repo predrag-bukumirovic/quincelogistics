@@ -1,16 +1,14 @@
 import Image from "next/image";
 import logo from "@/public/images/quince-logo.png";
-import logoWhite from "@/public/images/quince-logo-white.png";
 
 type Props = {
-  onDark?: boolean;
   eager?: boolean;
 };
 
-export default function Logo({ onDark = false, eager = false }: Props) {
+export default function Logo({ eager = false }: Props) {
   return (
     <Image
-      src={onDark ? logoWhite : logo}
+      src={logo}
       alt="QuinceLogistics"
       className="logo-img"
       loading={eager ? "eager" : "lazy"}

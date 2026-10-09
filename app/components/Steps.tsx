@@ -1,10 +1,8 @@
-import { steps as defaultSteps } from "../lib/content";
-
 type Props = {
-  items?: { title: string; text: string }[];
+  items: { title: string; text: string }[];
 };
 
-export default function Steps({ items = defaultSteps }: Props) {
+export default function Steps({ items }: Props) {
   return (
     <ol className="steps">
       {items.map((step, i) => (

@@ -1,29 +1,32 @@
-// Kontakt podaci su privremeni — zameniti pravim podacima pre objave.
+// Telefon i WhatsApp su privremeni — zameniti pravim brojevima pre objave.
 export const site = {
   name: "QuinceLogistics",
+  url: "https://quincelogistics.com",
   phone: { display: "+381 11 123 4567", href: "tel:+381111234567" },
-  email: "info@quincelogistics.rs",
+  // Broj u međunarodnom formatu, samo cifre (za wa.me link).
+  whatsapp: "381111234567",
+  email: "info@quincelogistics.com",
   address: {
-    street: "Industrijska zona bb",
-    postalCode: "11000",
-    city: "Beograd",
-    country: "Srbija",
+    street: "Kovači 5",
+    postalCode: "31300",
+    city: { sr: "Prijepolje", en: "Prijepolje", de: "Prijepolje" },
+    country: { sr: "Srbija", en: "Serbia", de: "Serbien" },
   },
   hours: [
-    { days: "Ponedeljak – petak", time: "08:00 – 17:00" },
-    { days: "Subota", time: "08:00 – 13:00" },
+    {
+      days: {
+        sr: "Ponedeljak – petak",
+        en: "Monday – Friday",
+        de: "Montag – Freitag",
+      },
+      time: "08:00 – 17:00",
+    },
+    {
+      days: { sr: "Subota", en: "Saturday", de: "Samstag" },
+      time: "08:00 – 13:00",
+    },
   ],
-  // PIB i matični broj se prikazuju u futeru čim se upišu.
-  pib: "",
-  mb: "",
+  pib: "113090680",
+  mb: "66570878",
   social: [] as { label: string; href: string }[],
 };
-
-export const navLinks = [
-  { href: "/", label: "Početna" },
-  { href: "/o-nama", label: "O nama" },
-  { href: "/usluge", label: "Usluge" },
-  { href: "/resenja", label: "Rešenja" },
-  { href: "/reference", label: "Reference" },
-  { href: "/karijera", label: "Karijera" },
-];

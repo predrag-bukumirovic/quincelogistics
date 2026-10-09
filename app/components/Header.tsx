@@ -5,15 +5,92 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { FiArrowRight, FiArrowUpRight, FiMenu, FiX } from "react-icons/fi";
 import Logo from "./Logo";
-import { navLinks, site } from "../lib/site";
+import {
+  contactLink,
+  langs,
+  languageNames,
+  navLinks,
+  routes,
+  saveLang,
+  translatePath,
+  type Lang,
+} from "../lib/i18n";
+import { site } from "../lib/site";
 
-const MOBILE_LINKS = [...navLinks, { href: "/kontakt", label: "Kontakt" }];
+const copy = {
+  sr: {
+    hiring: "Zapošljavamo vozače",
+    hiringMore: " C+E kategorije",
+    cta: "Zatražite ponudu",
+    mainNav: "Glavna navigacija",
+    mobileNav: "Mobilna navigacija",
+    openMenu: "Otvori meni",
+    closeMenu: "Zatvori meni",
+    hiringTag: "Zapošljavamo",
+    language: "Jezik",
+  },
+  en: {
+    hiring: "We're hiring drivers",
+    hiringMore: " with a C+E licence",
+    cta: "Request a quote",
+    mainNav: "Main navigation",
+    mobileNav: "Mobile navigation",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
+    hiringTag: "Hiring",
+    language: "Language",
+  },
+  de: {
+    hiring: "Wir stellen Fahrer ein",
+    hiringMore: " mit Führerschein CE",
+    cta: "Angebot anfordern",
+    mainNav: "Hauptnavigation",
+    mobileNav: "Mobile Navigation",
+    openMenu: "Menü öffnen",
+    closeMenu: "Menü schließen",
+    hiringTag: "Wir stellen ein",
+    language: "Sprache",
+  },
+};
 
 const bottomOf = (el: HTMLElement | null) =>
   el?.getBoundingClientRect().bottom ?? 0;
 
-export default function Header() {
+// Prelazak na drugi jezik je obična navigacija (svaki jezik ima svoj root layout),
+// a izbor se pamti za sledeću posetu.
+function LangSwitch({
+  lang,
+  pathname,
+  label,
+}: {
+  lang: Lang;
+  pathname: string;
+  label: string;
+}) {
+  return (
+    <nav className="lang-switch" aria-label={label}>
+      {langs.map((l) => (
+        <a
+          key={l}
+          href={translatePath(pathname, l)}
+          hrefLang={l}
+          lang={l}
+          aria-label={languageNames[l]}
+          aria-current={l === lang ? "true" : undefined}
+          onClick={() => saveLang(l)}
+        >
+          {l.toUpperCase()}
+        </a>
+      ))}
+    </nav>
+  );
+}
+
+export default function Header({ lang }: { lang: Lang }) {
+  const t = copy[lang];
   const pathname = usePathname();
+  const links = navLinks(lang);
+  const mobileLinks = [...links, contactLink(lang)];
   const [open, setOpen] = useState(false);
   const [menuTop, setMenuTop] = useState(0);
   const [menuPath, setMenuPath] = useState(pathname);
@@ -64,25 +141,28 @@ export default function Header() {
     <>
       <div className="topbar">
         <div className="wrap topbar-inner">
-          <Link href="/karijera" className="topbar-hiring">
-            Zapošljavamo vozače
-            <span className="topbar-hiring-more"> C+E kategorije</span>
+          <Link href={routes.careers[lang]} className="topbar-hiring">
+            {t.hiring}
+            <span className="topbar-hiring-more">{t.hiringMore}</span>
             <FiArrowRight size={14} aria-hidden="true" />
           </Link>
-          <div className="topbar-links">
-            <a href={site.phone.href}>{site.phone.display}</a>
-            <a href={`mailto:${site.email}`}>{site.email}</a>
+          <div className="topbar-end">
+            <div className="topbar-links">
+              <a href={site.phone.href}>{site.phone.display}</a>
+              <a href={`mailto:${site.email}`}>{site.email}</a>
+            </div>
+            <LangSwitch lang={lang} pathname={pathname} label={t.language} />
           </div>
         </div>
       </div>
 
       <header className="site-header" ref={headerRef}>
         <div className="wrap header-inner">
-          <Link href="/" className="logo" onClick={close}>
-            <Logo eager />
+          <Link href={routes.home[lang]} className="logo" onClick={close}>
+            <Logo />
           </Link>
-          <nav className="nav-links" aria-label="Glavna navigacija">
-            {navLinks.map((link) => (
+          <nav className="nav-links" aria-label={t.mainNav}>
+            {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -92,15 +172,15 @@ export default function Header() {
               </Link>
             ))}
           </nav>
-          <Link href="/kontakt" className="btn btn-primary header-cta">
-            Zatražite ponudu
+          <Link href={routes.contact[lang]} className="btn btn-primary header-cta">
+            {t.cta}
             <FiArrowUpRight size={18} aria-hidden="true" />
           </Link>
           <button
             ref={burgerRef}
             type="button"
             className="burger"
-            aria-label={open ? "Zatvori meni" : "Otvori meni"}
+            aria-label={open ? t.closeMenu : t.openMenu}
             aria-expanded={open}
             aria-controls="mobilni-meni"
             onClick={toggle}
@@ -116,8 +196,8 @@ export default function Header() {
         style={{ top: menuTop }}
         inert={!open}
       >
-        <nav className="wrap mobile-nav-links" aria-label="Mobilna navigacija">
-          {MOBILE_LINKS.map((link, i) => (
+        <nav className="wrap mobile-nav-links" aria-label={t.mobileNav}>
+          {mobileLinks.map((link, i) => (
             <Link
               key={link.href}
               href={link.href}
@@ -127,35 +207,27 @@ export default function Header() {
             >
               <span>
                 {link.label}
-                {link.href === "/karijera" && (
-                  <small className="mobile-nav-tag">Zapošljavamo</small>
+                {link.href === routes.careers[lang] && (
+                  <small className="mobile-nav-tag">{t.hiringTag}</small>
                 )}
               </span>
-              <FiArrowRight size={22} aria-hidden="true" />
             </Link>
           ))}
         </nav>
         <div className="wrap mobile-nav-foot">
-          <dl className="mobile-nav-contact">
-            <div>
-              <dt>Telefon</dt>
-              <dd>
-                <a href={site.phone.href}>{site.phone.display}</a>
-              </dd>
+          <div className="mobile-nav-meta">
+            <div className="mobile-nav-contact">
+              <a href={site.phone.href}>{site.phone.display}</a>
+              <a href={`mailto:${site.email}`}>{site.email}</a>
             </div>
-            <div>
-              <dt>E-mail</dt>
-              <dd>
-                <a href={`mailto:${site.email}`}>{site.email}</a>
-              </dd>
-            </div>
-          </dl>
+            <LangSwitch lang={lang} pathname={pathname} label={t.language} />
+          </div>
           <Link
-            href="/kontakt"
+            href={routes.contact[lang]}
             className="btn btn-primary mobile-nav-cta"
             onClick={close}
           >
-            Zatražite ponudu
+            {t.cta}
             <FiArrowUpRight size={18} aria-hidden="true" />
           </Link>
         </div>

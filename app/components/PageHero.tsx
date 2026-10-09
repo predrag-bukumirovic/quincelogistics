@@ -1,8 +1,12 @@
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { pageNames, routes, type Lang } from "../lib/i18n";
+
+const crumbsLabel = { sr: "Putanja", en: "Breadcrumb", de: "Navigationspfad" };
 
 type Props = {
+  lang: Lang;
   label: string;
   title: ReactNode;
   lead: ReactNode;
@@ -11,6 +15,7 @@ type Props = {
 };
 
 export default function PageHero({
+  lang,
   label,
   title,
   lead,
@@ -20,8 +25,8 @@ export default function PageHero({
   return (
     <section className="page-hero">
       <div className="wrap">
-        <nav className="crumbs hero-anim" aria-label="Putanja">
-          <Link href="/">Početna</Link>
+        <nav className="crumbs hero-anim" aria-label={crumbsLabel[lang]}>
+          <Link href={routes.home[lang]}>{pageNames.home[lang]}</Link>
           <span aria-hidden="true">/</span>
           <span aria-current="page">{label}</span>
         </nav>

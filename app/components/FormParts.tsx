@@ -1,3 +1,5 @@
+import type { HTMLAttributes } from "react";
+
 type FieldProps = {
   id: string;
   label: string;
@@ -5,6 +7,9 @@ type FieldProps = {
   placeholder?: string;
   autoComplete?: string;
   required?: boolean;
+  inputMode?: HTMLAttributes<HTMLInputElement>["inputMode"];
+  min?: number;
+  step?: string;
 };
 
 export function Field({
@@ -14,6 +19,9 @@ export function Field({
   placeholder,
   autoComplete,
   required,
+  inputMode,
+  min,
+  step,
 }: FieldProps) {
   return (
     <div className="form-field">
@@ -28,6 +36,9 @@ export function Field({
         placeholder={placeholder}
         autoComplete={autoComplete}
         required={required}
+        inputMode={inputMode}
+        min={min}
+        step={step}
       />
     </div>
   );

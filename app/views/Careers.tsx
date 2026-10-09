@@ -11,9 +11,9 @@ import { site } from "../lib/site";
 
 const sr = {
   description:
-    "QuinceLogistics zapošljava vozače C+E kategorije za domaći i međunarodni drumski transport. Prijava od prvog dana, ispravna vozila i plata na vreme.",
+    "QuinceLogistics zapošljava vozače B, B+E, C i C+E kategorije za domaći i međunarodni drumski transport. Prijava od prvog dana, ispravna vozila i plata na vreme.",
   heroLabel: "Karijera",
-  heroTitle: "Tražimo vozače C+E kategorije.",
+  heroTitle: "Tražimo vozače B, B+E, C\u00a0i\u00a0C+E kategorije.",
   heroLead:
     "Domaće i međunarodne ture, ispravna vozila i plata koja stiže na vreme. Prijava traje par minuta — CV nije obavezan.",
   apply: "Prijavite se",
@@ -21,27 +21,27 @@ const sr = {
   jobsTitle: "Trenutno zapošljavamo.",
   jobs: [
     {
-      title: "Vozač C+E — međunarodni transport",
-      text: "Ture između Srbije i zemalja širom Evrope, tegljačem sa poluprikolicom.",
+      title: "Vozač C i C+E kategorije",
+      text: "Solo kamion ili tegljač sa poluprikolicom, na domaćim i međunarodnim turama.",
       meta: [
+        ["Vozilo", "solo kamion, tegljač"],
         ["Ture", "Srbija ⇄ cela Evropa"],
-        ["Turnus", "po dogovoru"],
         ["Angažman", "puno radno vreme"],
       ],
     },
     {
-      title: "Vozač C+E — domaći transport",
-      text: "Ture po Srbiji, sa češćim dolaskom kući. Dobar početak za vozače bez međunarodnog iskustva.",
+      title: "Vozač B i B+E kategorije",
+      text: "Kombi i dostavna vozila do 3,5 t, sa prikolicom ili bez nje.",
       meta: [
-        ["Ture", "cela Srbija"],
-        ["Kući", "češće, po rasporedu"],
+        ["Vozilo", "kombi do 3,5 t"],
+        ["Prikolica", "za B+E kategoriju"],
         ["Angažman", "puno radno vreme"],
       ],
     },
     {
       title: "Otvorena prijava",
       text: "Ne vidite poziciju za sebe? Pošaljite prijavu — javljamo se čim se otvori mesto.",
-      meta: [["Za", "vozače C i C+E kategorije"]],
+      meta: [["Za", "B, B+E, C i C+E kategoriju"]],
     },
   ],
   photoAlt: "Kamion u vožnji u sumrak",
@@ -58,7 +58,7 @@ const sr = {
     },
     {
       title: "Ispravna vozila",
-      text: "Redovan servis i provera pre svake ture. Ne šaljemo vas na put kamionom u koji ne bismo seli.",
+      text: "Redovan servis i provera pre svake ture. Ne šaljemo vas na put vozilom u koje ne bismo seli.",
     },
     {
       title: "Realno planirane ture",
@@ -76,9 +76,9 @@ const sr = {
   reqLabel: "Šta tražimo",
   reqTitle: "Dokumenta i iskustvo.",
   requirements: [
-    ["Dozvola", "C+E kategorija"],
-    ["Kod 95", "važeće periodično osposobljavanje"],
-    ["Tahograf", "kartica vozača za digitalni tahograf"],
+    ["Dozvola", "B, B+E, C ili C+E kategorija"],
+    ["Kod 95", "važeći, za C i C+E kategoriju"],
+    ["Tahograf", "kartica vozača, za C i C+E kategoriju"],
     ["Pasoš", "važeći, za međunarodne ture"],
     ["Iskustvo", "poželjno, nije uslov za domaće ture"],
     ["Jezik", "osnovni engleski ili nemački je prednost"],
@@ -118,9 +118,9 @@ const sr = {
 
 const en: typeof sr = {
   description:
-    "QuinceLogistics is hiring C+E drivers for domestic and international road freight. Registered employment from day one, roadworthy trucks and pay on time.",
+    "QuinceLogistics is hiring B, B+E, C and C+E drivers for domestic and international road freight. Registered employment from day one, roadworthy vehicles and pay on time.",
   heroLabel: "Careers",
-  heroTitle: "We're hiring C+E drivers.",
+  heroTitle: "We're hiring B, B+E, C\u00a0and\u00a0C+E drivers.",
   heroLead:
     "Domestic and international routes, well-maintained trucks and pay that arrives on time. Applying takes a few minutes — no CV needed.",
   apply: "Apply now",
@@ -128,27 +128,27 @@ const en: typeof sr = {
   jobsTitle: "Currently hiring.",
   jobs: [
     {
-      title: "C+E driver — international transport",
-      text: "Runs between Serbia and countries across Europe, driving a tractor unit with a semi-trailer.",
+      title: "Category C and C+E driver",
+      text: "Rigid truck or tractor unit with a semi-trailer, on domestic and international runs.",
       meta: [
+        ["Vehicle", "rigid truck, tractor unit"],
         ["Routes", "Serbia ⇄ all of Europe"],
-        ["Rotation", "by agreement"],
         ["Contract", "full-time"],
       ],
     },
     {
-      title: "C+E driver — domestic transport",
-      text: "Runs within Serbia, with more time at home. A good start for drivers without international experience.",
+      title: "Category B and B+E driver",
+      text: "Vans and light commercial vehicles up to 3.5 t, with or without a trailer.",
       meta: [
-        ["Routes", "all of Serbia"],
-        ["Home time", "more often, by schedule"],
+        ["Vehicle", "van up to 3.5 t"],
+        ["Trailer", "for category B+E"],
         ["Contract", "full-time"],
       ],
     },
     {
       title: "Open application",
       text: "Don't see a position for you? Send an application — we'll get in touch as soon as a place opens up.",
-      meta: [["For", "category C and C+E drivers"]],
+      meta: [["For", "categories B, B+E, C and C+E"]],
     },
   ],
   photoAlt: "Truck on the road at dusk",
@@ -165,7 +165,7 @@ const en: typeof sr = {
     },
     {
       title: "Roadworthy trucks",
-      text: "Regular servicing and a check before every trip. We won't send you out in a truck we wouldn't drive ourselves.",
+      text: "Regular servicing and a check before every trip. We won't send you out in a vehicle we wouldn't drive ourselves.",
     },
     {
       title: "Realistic schedules",
@@ -183,9 +183,9 @@ const en: typeof sr = {
   reqLabel: "What we're looking for",
   reqTitle: "Documents and experience.",
   requirements: [
-    ["Licence", "category C+E"],
-    ["Code 95", "valid Driver CPC"],
-    ["Tachograph", "driver card for a digital tachograph"],
+    ["Licence", "category B, B+E, C or C+E"],
+    ["Code 95", "valid Driver CPC, for C and C+E"],
+    ["Tachograph", "driver card, for C and C+E"],
     ["Passport", "valid, for international routes"],
     ["Experience", "preferred, not required for domestic routes"],
     ["Languages", "basic English or German is an advantage"],
@@ -225,9 +225,9 @@ const en: typeof sr = {
 
 const de: typeof sr = {
   description:
-    "QuinceLogistics sucht Berufskraftfahrer mit Führerschein CE für nationale und internationale Straßentransporte. Anmeldung ab dem ersten Tag, gepflegte Fahrzeuge und pünktlicher Lohn.",
+    "QuinceLogistics sucht Fahrer der Klassen B, BE, C und CE für nationale und internationale Straßentransporte. Anmeldung ab dem ersten Tag, gepflegte Fahrzeuge und pünktlicher Lohn.",
   heroLabel: "Karriere",
-  heroTitle: "Wir suchen Fahrer mit Führerschein CE.",
+  heroTitle: "Wir suchen Fahrer der Klassen B, BE, C\u00a0und\u00a0CE.",
   heroLead:
     "Nationale und internationale Touren, gepflegte Fahrzeuge und ein Lohn, der pünktlich kommt. Die Bewerbung dauert nur wenige Minuten – ein Lebenslauf ist nicht nötig.",
   apply: "Jetzt bewerben",
@@ -235,27 +235,27 @@ const de: typeof sr = {
   jobsTitle: "Aktuell stellen wir ein.",
   jobs: [
     {
-      title: "Berufskraftfahrer CE (m/w/d) – international",
-      text: "Touren zwischen Serbien und Ländern in ganz Europa, mit Sattelzugmaschine und Auflieger.",
+      title: "Berufskraftfahrer (m/w/d) – Klasse C und CE",
+      text: "Solo-Lkw oder Sattelzug, auf nationalen und internationalen Touren.",
       meta: [
+        ["Fahrzeug", "Solo-Lkw, Sattelzug"],
         ["Touren", "Serbien ⇄ ganz Europa"],
-        ["Turnus", "nach Absprache"],
         ["Anstellung", "Vollzeit"],
       ],
     },
     {
-      title: "Berufskraftfahrer CE (m/w/d) – Serbien",
-      text: "Touren innerhalb Serbiens, häufiger zu Hause. Ein guter Einstieg für Fahrer ohne internationale Erfahrung.",
+      title: "Transporterfahrer (m/w/d) – Klasse B und BE",
+      text: "Transporter und Lieferwagen bis 3,5 t, mit oder ohne Anhänger.",
       meta: [
-        ["Touren", "ganz Serbien"],
-        ["Zu Hause", "häufiger, nach Plan"],
+        ["Fahrzeug", "Transporter bis 3,5 t"],
+        ["Anhänger", "für Klasse BE"],
         ["Anstellung", "Vollzeit"],
       ],
     },
     {
       title: "Initiativbewerbung",
       text: "Keine passende Stelle dabei? Senden Sie uns Ihre Bewerbung – wir melden uns, sobald eine Stelle frei wird.",
-      meta: [["Für", "Fahrer mit Führerschein C oder CE"]],
+      meta: [["Für", "Klassen B, BE, C und CE"]],
     },
   ],
   photoAlt: "Lkw in der Abenddämmerung",
@@ -272,7 +272,7 @@ const de: typeof sr = {
     },
     {
       title: "Einwandfreie Fahrzeuge",
-      text: "Regelmäßige Wartung und eine Kontrolle vor jeder Tour. Wir schicken Sie mit keinem Lkw los, in den wir selbst nicht einsteigen würden.",
+      text: "Regelmäßige Wartung und eine Kontrolle vor jeder Tour. Wir schicken Sie mit keinem Fahrzeug los, in das wir selbst nicht einsteigen würden.",
     },
     {
       title: "Realistisch geplante Touren",
@@ -290,9 +290,9 @@ const de: typeof sr = {
   reqLabel: "Was wir erwarten",
   reqTitle: "Papiere und Erfahrung.",
   requirements: [
-    ["Führerschein", "Klasse CE"],
-    ["Code 95", "gültige Berufskraftfahrer-Qualifikation"],
-    ["Fahrerkarte", "für den digitalen Tachografen"],
+    ["Führerschein", "Klasse B, BE, C oder CE"],
+    ["Code 95", "gültig, für Klasse C und CE"],
+    ["Fahrerkarte", "für Klasse C und CE"],
     ["Reisepass", "gültig, für internationale Touren"],
     ["Erfahrung", "erwünscht, für Touren in Serbien keine Voraussetzung"],
     ["Sprachen", "Grundkenntnisse in Englisch oder Deutsch sind ein Plus"],

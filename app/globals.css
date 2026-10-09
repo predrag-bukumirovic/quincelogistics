@@ -334,8 +334,14 @@ address {
 }
 
 @media (max-width: 799px) {
-  .topbar-hiring-more,
   .topbar-links a + a {
+    display: none;
+  }
+}
+
+/* Spisak kategorija vozača staje u traku tek na širim ekranima. */
+@media (max-width: 899px) {
+  .topbar-hiring-more {
     display: none;
   }
 }

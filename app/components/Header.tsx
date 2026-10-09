@@ -20,7 +20,7 @@ import { site } from "../lib/site";
 const copy = {
   sr: {
     hiring: "Zapošljavamo vozače",
-    hiringMore: " C+E kategorije",
+    hiringMore: " B, B+E, C i C+E kategorije",
     cta: "Zatražite ponudu",
     mainNav: "Glavna navigacija",
     mobileNav: "Mobilna navigacija",
@@ -31,7 +31,7 @@ const copy = {
   },
   en: {
     hiring: "We're hiring drivers",
-    hiringMore: " with a C+E licence",
+    hiringMore: " with B, B+E, C or C+E licences",
     cta: "Request a quote",
     mainNav: "Main navigation",
     mobileNav: "Mobile navigation",
@@ -42,7 +42,7 @@ const copy = {
   },
   de: {
     hiring: "Wir stellen Fahrer ein",
-    hiringMore: " mit Führerschein CE",
+    hiringMore: " – Klassen B, BE, C und CE",
     cta: "Angebot anfordern",
     mainNav: "Hauptnavigation",
     mobileNav: "Mobile Navigation",

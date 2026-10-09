@@ -9,7 +9,8 @@ import { site } from "../lib/site";
 
 const copy = {
   sr: {
-    documents: ["C+E dozvola", "Kod 95", "Kartica za tahograf", "Važeći pasoš"],
+    categories: ["B", "B+E", "C", "C+E"],
+    documents: ["Kod 95", "Kartica za tahograf", "Važeći pasoš"],
     experience: ["Do 1 godine", "1–3 godine", "3–5 godina", "Više od 5 godina"],
     sentTitle: "Hvala, prijava je zabeležena.",
     sentText: "Javljamo se u roku od dva radna dana. Ako vam je hitno, pozovite nas na",
@@ -23,7 +24,8 @@ const copy = {
     cityHint: "npr. Kragujevac",
     job: "Posao i iskustvo",
     position: "Pozicija",
-    have: "Šta imate",
+    licence: "Kategorije u vozačkoj dozvoli",
+    have: "Dokumenta",
     years: "Iskustvo u vožnji",
     note: "Napomena",
     noteHint: "Gde ste do sada vozili, sa kojim vozilima, od kada možete da počnete…",
@@ -32,7 +34,8 @@ const copy = {
     privacyLink: "politici privatnosti",
   },
   en: {
-    documents: ["C+E licence", "Code 95", "Tachograph card", "Valid passport"],
+    categories: ["B", "B+E", "C", "C+E"],
+    documents: ["Code 95", "Tachograph card", "Valid passport"],
     experience: ["Up to 1 year", "1–3 years", "3–5 years", "More than 5 years"],
     sentTitle: "Thank you — your application has been received.",
     sentText: "We'll be in touch within two working days. If it's urgent, call us on",
@@ -46,7 +49,8 @@ const copy = {
     cityHint: "e.g. Kragujevac",
     job: "Job and experience",
     position: "Position",
-    have: "What you have",
+    licence: "Licence categories",
+    have: "Documents",
     years: "Driving experience",
     note: "Notes",
     noteHint: "Where you've driven so far, which vehicles, when you can start…",
@@ -55,7 +59,8 @@ const copy = {
     privacyLink: "privacy policy",
   },
   de: {
-    documents: ["Führerschein CE", "Code 95", "Fahrerkarte", "Gültiger Reisepass"],
+    categories: ["B", "BE", "C", "CE"],
+    documents: ["Code 95", "Fahrerkarte", "Gültiger Reisepass"],
     experience: ["Bis 1 Jahr", "1–3 Jahre", "3–5 Jahre", "Über 5 Jahre"],
     sentTitle: "Vielen Dank – Ihre Bewerbung ist eingegangen.",
     sentText: "Wir melden uns innerhalb von zwei Werktagen. Wenn es eilt, rufen Sie uns an unter",
@@ -69,7 +74,8 @@ const copy = {
     cityHint: "z. B. Kragujevac",
     job: "Stelle und Erfahrung",
     position: "Stelle",
-    have: "Was Sie haben",
+    licence: "Führerscheinklassen",
+    have: "Unterlagen",
     years: "Fahrerfahrung",
     note: "Anmerkungen",
     noteHint: "Wo Sie bisher gefahren sind, mit welchen Fahrzeugen, ab wann Sie anfangen können …",
@@ -147,6 +153,12 @@ export default function JobForm({
           legend={t.position}
           options={positions}
           defaultValue={positions[0]}
+        />
+        <Choices
+          name="kategorije"
+          legend={t.licence}
+          options={t.categories}
+          multiple
         />
         <Choices name="dokumenta" legend={t.have} options={t.documents} multiple />
         <Choices name="iskustvo" legend={t.years} options={t.experience} />
